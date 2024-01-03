@@ -1,0 +1,76 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.StrainCalculator" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your dark theme here. -->
+
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/statusBarDark</item>
+    </style>
+
+    <!--  StatusBarLayoutStyle-->
+    <style name="StatusBarLayoutStyle">
+        <item name="android:background">@drawable/mode_night_bg_custom_appbar</item>
+    </style>
+
+    <!-- StatusBarSearchLayoutStyle-->
+    <style name="StatusBarSearchLayoutStyle">
+        <item name="android:background">@drawable/mode_dark_bg_toolbar</item>
+    </style>
+
+    <!--"TabLayoutStyle"-->
+    <style name="TabLayoutStyle">
+        <item name="tabIndicatorColor">#FFFFFF</item>
+        <item name="tabSelectedTextColor">#FFFFFF</item>
+        <item name="tabTextColor">#9F9F9F</item>
+        <item name="android:background">@drawable/mode_night_bg_tablayout</item>
+    </style>
+
+    <!--    Navigation view-->
+    <style name="NavigationView" parent="@style/Widget.MaterialComponents.NavigationView">
+        <item name="android:background">@drawable/mode_dark_navigation_view</item>
+        <item name="itemHorizontalPadding">@dimen/nav_item_horizontal_padding</item>
+    </style>
+
+
+    <!-- Custom style for the TextView -->
+    <style name="TextViewStyle">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!-- Custom style for the TextViewSmall -->
+    <style name="TextViewStyleSmall">
+        <item name="android:textColor">#DBDBDB</item>
+    </style>
+
+
+    <!--  layout style-->
+    <style name="LayoutStyle">
+        <item name="android:background">@color/dark_black</item>
+    </style>
+
+    <!--"BackButtonStyle"-->
+    <style name="BackButtonStyle">
+        <item name="android:background">@drawable/mode_night_bg_backbutton</item>
+    </style>
+
+
+    <!--    View line-->
+    <style name="ViewStyle">
+        <item name="android:background">@color/line_colour</item>
+    </style>
+
+
+
+    <!--NextPreviousRipple-->
+    <style name="next_previous_ripple">
+        <item name="android:background">@drawable/mode_dark_bg_next_previous_ripple</item>
+    </style>
+
+
+    <!--"EdiText"-->
+    <style name="EditTextStyle">
+        <item name="android:background">@drawable/mode_night_edittext</item>
+    </style>
+
+
+</resources>
