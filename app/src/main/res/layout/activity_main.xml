@@ -113,16 +113,15 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/darkModeSwitch"
+            <TextView
+                android:id="@+id/darkModeText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:gravity="center"
-                android:paddingEnd="40dp"
+                android:padding="10dp"
                 android:text="Dark Mode"
-                android:thumb="@drawable/thumb_layerlist"
-                app:track="@drawable/track_backgrounds" />
+                style="@style/TextViewStyle"
+                android:gravity="center"
+                android:layout_marginBottom="20dp"/>
 
 
         </LinearLayout>

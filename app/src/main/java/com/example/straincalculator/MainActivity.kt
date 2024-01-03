@@ -17,14 +17,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.straincalculator.databinding.ActivityMainBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity() : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var sharedPreferencesDarkMode: SharedPreferences
+    private val themeList = arrayOf("Light Mode", "Night Mode", "Auto (System Defaults)")
     private lateinit var sharedPreferencesHelper: SharedPreferenceHelper
-    private var isDarkModeEnabled = false // Initialize with your default
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,15 +33,32 @@ class MainActivity() : AppCompatActivity() {
 
         sharedPreferencesHelper = SharedPreferenceHelper(this)
 
-// SharedPreference for Switching Dark Mode
-        sharedPreferencesDarkMode = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        isDarkModeEnabled = sharedPreferencesHelper.isDarkModeEnabled()
 
-// Initialize the app's theme based on the stored mode
-        val nightMode =
-            if (isDarkModeEnabled) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
-        AppCompatDelegate.setDefaultNightMode(nightMode)
+        //NightMode
+        var checkedTheme = sharedPreferencesHelper.theme
+        binding.darkModeText.text = "Theme: ${themeList[sharedPreferencesHelper.theme]}"
 
+        binding.darkModeText.setOnClickListener {
+            val dialog = MaterialAlertDialogBuilder(this)
+                .setTitle("Change theme")
+                .setPositiveButton("Ok") { _, _ ->
+                    sharedPreferencesHelper.theme = checkedTheme
+                    AppCompatDelegate.setDefaultNightMode(sharedPreferencesHelper.themeFlag[checkedTheme])
+                    binding.darkModeText.text = "Theme: ${themeList[sharedPreferencesHelper.theme]}"
+                }
+                .setSingleChoiceItems(themeList, checkedTheme) { _, which ->
+                    checkedTheme = which
+                }
+                .setNegativeButton("Cancel") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .setCancelable(false)
+                .show()
+
+            dialog.setOnDismissListener {
+                dialog.dismiss()
+            }
+        }
 
         binding.navView.visibility = View.VISIBLE
 
@@ -81,8 +98,6 @@ class MainActivity() : AppCompatActivity() {
             Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT)
         })
 
-
-
         binding.navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_feedback -> {
@@ -104,24 +119,6 @@ class MainActivity() : AppCompatActivity() {
             true // Return true to indicate that the click was handled
         }
 
-
-        //dark mode switch
-        val isDarkModeEnabled = sharedPreferencesHelper.isDarkModeEnabled()
-        // Initialize the dark mode switch
-        binding.darkModeSwitch.isChecked = isDarkModeEnabled
-        binding.darkModeSwitch.setOnCheckedChangeListener { _, isChecked ->
-            // Update the shared preference using the helper
-            sharedPreferencesHelper.setDarkModeEnabled(isChecked)
-            // Update the theme based on the switch state
-            val nightMode = if (isChecked) {
-                AppCompatDelegate.MODE_NIGHT_YES
-            } else {
-                AppCompatDelegate.MODE_NIGHT_NO
-            }
-            AppCompatDelegate.setDefaultNightMode(nightMode)
-
-            this.isDarkModeEnabled = isChecked
-        }
 
     }
 

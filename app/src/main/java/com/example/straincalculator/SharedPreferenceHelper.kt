@@ -1,18 +1,28 @@
 package com.example.straincalculator
 
 import android.content.Context
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 
 class SharedPreferenceHelper(context: Context) {
-
     private val sharedPreferences =
-        context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        context.getSharedPreferences(context.packageName, AppCompatActivity.MODE_PRIVATE)
 
-    fun isDarkModeEnabled(): Boolean {
-        return sharedPreferences.getBoolean("dark_mode_enabled", false)
-    }
 
-    fun setDarkModeEnabled(enabled: Boolean) {
-        sharedPreferences.edit().putBoolean("dark_mode_enabled", enabled).apply()
-    }
+    private val editor = sharedPreferences.edit()
+    private val keyTheme="theme"
+    var theme get() = sharedPreferences.getInt(keyTheme,2)
+        set(value) {
+            editor.putInt(keyTheme,value)
+            editor.commit()
+        }
+
+    val themeFlag= arrayOf(
+        AppCompatDelegate.MODE_NIGHT_NO,
+        AppCompatDelegate.MODE_NIGHT_YES,
+        AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+    )
+
+
 
 }
